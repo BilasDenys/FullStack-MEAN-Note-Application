@@ -1,0 +1,36 @@
+<form class="position-relative" (ngSubmit)="submit()" [formGroup]="form">
+  <div class="alert alert-danger" role="alert" *ngIf="message">
+    {{message}}
+  </div>
+  <div class="alert alert-success" role="alert" *ngIf="registerMessage">
+    {{registerMessage}}
+  </div>
+  <div class="form__header">
+    <h1 class="logo">Sign In</h1>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" name="email" id="email" aria-describedby="email" formControlName="email">
+    <div class="validation mt-2" *ngIf="form.get('email').touched && form.get('email').invalid">
+      <div  class="form-text" *ngIf="form.get('email').errors.required">Email required</div>
+      <div  class="form-text"  *ngIf="form.get('email').errors.email">Enter correct email.</div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" formControlName="password">
+  </div>
+  <div class="validation mb-2" *ngIf="form.get('password').touched && form.get('password').invalid">
+    <div  class="form-text" *ngIf="form.get('password').errors.required">Password required</div>
+    <div  class="form-text"  *ngIf="form.get('password').errors.minlength">
+      Password should exist {{form.get('password').errors.minlength.requiredLength}} symbols, now it has {{form.get('password').errors.minlength.actualLength}}
+    </div>
+  </div>
+  <button type="submit" [disabled]="form.invalid" class="btn btn-primary position-absolute end-0"  *ngIf="!isLoading">Submit</button>
+  <button class="btn btn-primary position-absolute end-0" type="button" disabled *ngIf="isLoading">
+    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+    Loading...
+  </button>
+</form>
+
+

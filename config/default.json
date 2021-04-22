@@ -1,0 +1,5 @@
+{
+  "PORT" : 5000,
+  "jwtSecretKey": "Denys portfolio application",
+  "mongoURI": "mongodb+srv://bilasdenys:446688qwerty@mean.wkjk4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}

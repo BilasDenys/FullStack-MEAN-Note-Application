@@ -1,0 +1,45 @@
+<div class="container">
+<!--  <div class="alert" >-->
+<!--    {{options.message}}-->
+<!--    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>-->
+<!--  </div>-->
+
+  <div class="alert alert-dismissible fade show" role="alert" *ngIf="options.status" role="alert" [ngClass]="{
+  'alert-success': options.type === 'success',
+  'alert-warning': options.type === 'warning',
+  'alert-light': options.type === 'ligth'
+   }">
+    {{options.message}}
+    <button type="button" class="btn-close"(click)="closeAlertWindow()" aria-label="Close"></button>
+  </div>
+
+  <app-note-form
+    (outputNewNote)="newNote($event)"
+    [statusValue]="statusValue"
+  ></app-note-form>
+  <h2 class="mb-3">Notes</h2>
+  <div class="wrapper" *ngIf="!statusValue; else spinner">
+    <div *ngIf="notes.length !==0;else emptyList">
+      <div class="notes" *ngFor="let note of notes">
+        <app-note-list
+          (removeNote)="removeNote($event)"
+          [noteProps]="note"
+          (editNoteChange)="toggleEditNote($event)"
+        ></app-note-list>
+      </div>
+    </div>
+
+    <ng-template #emptyList>
+      <div class="row bg-light">
+        <div class="col-2 text-truncate offset-5 p-3">
+         List empty....
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+
+  <ng-template #spinner>
+    <app-spinner></app-spinner>
+  </ng-template>
+</div>

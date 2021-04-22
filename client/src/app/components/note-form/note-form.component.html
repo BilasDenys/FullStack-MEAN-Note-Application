@@ -1,0 +1,16 @@
+<div class="position-relative ">
+  <h2>Title</h2>
+  <div class="wrap mb-3 shadow-sm p-2 mb-2 bg-body rounded"  (keydown.enter)="addNewNote()">
+    <input type="text" class="form-control" placeholder="Add new note..." [(ngModel)]="title">
+    <button type="submit" [disabled]="isLoading"
+            class="btn btn-outline-success position-absolute end-0"
+            (click)="addNewNote()"
+            *ngIf="!isLoading">
+      <i class="bi bi-plus-square"></i>
+    </button>
+    <button class="btn btn-outline-dark position-absolute end-0 m-1" type="button" disabled *ngIf="isLoading">
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<li class="list-group-item shadow-sm p-2 mb-2 bg-body rounded"
+    *ngIf="!editStatus;else editField"
+    [ngClass]="{'completed': noteProps.completed}"
+    (click)="edit(noteProps)"
+>
+  <input type="checkbox" [checked]="noteProps.completed">
+  {{noteProps.title}}
+  <small class="date">
+    {{noteProps.createdAt | date:'mediumDate' }}
+  </small>
+  <div class="actions">
+    <button type="button" class="btn btn-outline-warning btn-sm m-1" (click)="toggleEditStatus()"><i
+      class="bi bi-pencil"></i></button>
+    <button type="button" class="btn btn-outline-danger btn-sm m-1" (click)="remove(noteProps)"><i
+      class="bi bi-trash"></i></button>
+  </div>
+</li>
+
+<ng-template #editField>
+  <li>
+    <input class="p-1 offset-4" type="text" [(ngModel)]="noteProps.title">
+    <div class="actions">
+      <button type="button" class="btn btn-outline-warning btn-sm m-1" (click)="edit(noteProps)"><i
+        class="bi bi-pencil"></i></button>
+    </div>
+  </li>
+</ng-template>
+
+
+
